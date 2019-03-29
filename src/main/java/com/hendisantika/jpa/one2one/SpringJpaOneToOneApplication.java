@@ -4,6 +4,8 @@ import com.hendisantika.jpa.one2one.model.Husband;
 import com.hendisantika.jpa.one2one.model.Wife;
 import com.hendisantika.jpa.one2one.repository.HusbandRepository;
 import com.hendisantika.jpa.one2one.repository.WifeRepository;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +17,7 @@ import java.util.List;
 
 @SpringBootApplication
 public class SpringJpaOneToOneApplication implements CommandLineRunner {
+    private static Logger logger = LogManager.getLogger(SpringJpaOneToOneApplication.class);
 
     @Autowired
     WifeRepository wifeRepository;
@@ -58,10 +61,10 @@ public class SpringJpaOneToOneApplication implements CommandLineRunner {
         List<Wife> wifes = wifeRepository.findAll();
         List<Husband> husbands = husbandRepository.findAll();
 
-        System.out.println("===================Wifes:==================");
+        logger.info("===================Wifes:==================");
         wifes.forEach(System.out::println);
 
-        System.out.println("===================Husbands:==================");
+        logger.info("===================Husbands:==================");
         husbands.forEach(System.out::println);
     }
 }
