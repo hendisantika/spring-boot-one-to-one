@@ -4,8 +4,8 @@ import com.hendisantika.jpa.one2one.model.Husband;
 import com.hendisantika.jpa.one2one.model.Wife;
 import com.hendisantika.jpa.one2one.repository.HusbandRepository;
 import com.hendisantika.jpa.one2one.repository.WifeRepository;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -37,13 +37,13 @@ public class SpringJpaOneToOneApplication implements CommandLineRunner {
     }
 
     @Transactional
-    private void deleteData() {
+    public void deleteData() {
         wifeRepository.deleteAll();
         husbandRepository.deleteAll();
     }
 
     @Transactional
-    private void saveData() {
+    public void saveData() {
         // Store a wife to DB
         Wife lisa = new Wife("Lisa", new Husband("David"));
         wifeRepository.save(lisa);
@@ -52,11 +52,11 @@ public class SpringJpaOneToOneApplication implements CommandLineRunner {
         Wife mary = new Wife("Mary", new Husband("Peter"));
         Wife lauren = new Wife("Lauren", new Husband("Phillip"));
 
-        wifeRepository.save(Arrays.asList(mary, lauren));
+        wifeRepository.saveAll(Arrays.asList(mary, lauren));
     }
 
     @Transactional
-    private void showData() {
+    public void showData() {
         // get All data
         List<Wife> wifes = wifeRepository.findAll();
         List<Husband> husbands = husbandRepository.findAll();
